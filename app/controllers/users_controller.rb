@@ -8,10 +8,16 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1 or /users/1.json
-  def show
-    @users = set_user  
-    render json: @users, status: :ok
+  # def show
+  #   @users = set_user  
+  #   render json: @users, status: :ok
     
+  # end
+
+  def show
+    names = User.find_by(name: params[:name])
+
+    render json: names, status: :ok
   end
 
  

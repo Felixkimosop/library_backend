@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :collections, only: [:index, :show, :destroy]
   resources :books, only: [:index, :show, :create, :destroy]
 
-  resources :users, only: [:index, :create, :show, :destroy]
+  resources :users, only: [:index, :create, :name, :show, :destroy]
 
   resources :admins, only: [:index, :create, :show]
 
