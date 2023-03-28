@@ -7,14 +7,41 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'faker'
 
+# 10.times do
+#   admin = Admin.new(
+#     name: Faker::Name.name,
+#     email: Faker::Internet.email,
+#     password: 'password',
+#     password_confirmation: 'password'
+#   )
+#   admin.save!
+# end
+
+# 10.times do
+#   Book.create!(
+#     title: Faker::Book.title,
+#     image_url: Faker::Internet.url,
+#     description: Faker::Lorem.paragraph,
+#     admin_id: Faker::Number.between(from: 1, to: 5)
+#   )
+# end
+
+
+
 10.times do
-  admin = Admin.new(
+  user = User.new(
     name: Faker::Name.name,
     email: Faker::Internet.email,
     password: 'password',
     password_confirmation: 'password'
   )
-  admin.save!
+  user.save!
+end
+10.times do
+  Collection.create!(
+    user_id: Faker::Number.between(from: 1, to: 5),
+    book_id: Faker::Number.between(from: 1, to: 5)
+  )
 end
 
 
