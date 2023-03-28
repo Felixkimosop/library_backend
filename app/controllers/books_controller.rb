@@ -10,7 +10,11 @@ class BooksController < ApplicationController
   # GET /books/1 or /books/1.json
   def show
     books = set_book
-    render json: books
+    if books 
+    render json: books, status: :ok
+    else
+      render json: { "error": "Book not found"}, status: :not_found
+    end
   end
 
 
@@ -45,7 +49,7 @@ class BooksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
-      @book = Book.find(params[:id])
+      @book = Book.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
