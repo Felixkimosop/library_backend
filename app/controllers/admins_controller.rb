@@ -10,7 +10,12 @@ class AdminsController < ApplicationController
   # GET /admins/1 or /admins/1.json
   def show
     admin = set_admin
+    if admin
+
     render json: admin
+    else 
+      render json: {"error": "admin not found" }, status: :not_found 
+    end
   end
 
   
