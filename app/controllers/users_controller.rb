@@ -7,6 +7,18 @@ class UsersController < ApplicationController
     render json: @users
   end
 
+  def add_book
+    @user = User.find_by(id: params[:id])
+    @book = Book.find_by(id: params[:book_id])
+
+    if @user.books.include?(@book)
+      render json: { error: "Book already added to collection" }, status: :unprocessable_entity
+    else
+      @user.books << @book
+      render json: { success: "Book added to collection" }
+    end
+  end
+
   # GET /users/1 or /users/1.json
   # def show
   #   @users = set_user  
@@ -16,8 +28,12 @@ class UsersController < ApplicationController
 
   def show
     names = User.find_by(name: params[:name])
+    if names
 
     render json: names, status: :ok
+    else
+      render json: {"error": "No such user"}, status: :not_found
+    end
   end
 
  

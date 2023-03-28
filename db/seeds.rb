@@ -28,15 +28,16 @@ require 'faker'
 
 
 
-10.times do
-  user = User.new(
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
-    password: 'password',
-    password_confirmation: 'password'
-  )
-  user.save!
-end
+# 10.times do
+#   user = User.new(
+#     name: Faker::Name.name,
+#     email: Faker::Internet.email,
+#     password: 'password',
+#     password_confirmation: 'password'
+#   )
+#   user.save!
+# end
+
 10.times do
   Collection.create!(
     user_id: Faker::Number.between(from: 1, to: 5),
