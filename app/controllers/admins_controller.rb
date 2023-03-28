@@ -4,20 +4,17 @@ class AdminsController < ApplicationController
   # GET /admins or /admins.json
   def index
     @admins = Admin.all
+    render json: @admins
   end
 
   # GET /admins/1 or /admins/1.json
   def show
+    admin = set_admin
+    render json: admin
   end
 
-  # GET /admins/new
-  def new
-    @admin = Admin.new
-  end
+  
 
-  # GET /admins/1/edit
-  def edit
-  end
 
   # POST /admins or /admins.json
   def create
@@ -34,18 +31,7 @@ class AdminsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /admins/1 or /admins/1.json
-  def update
-    respond_to do |format|
-      if @admin.update(admin_params)
-        format.html { redirect_to admin_url(@admin), notice: "Admin was successfully updated." }
-        format.json { render :show, status: :ok, location: @admin }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+ 
 
   # DELETE /admins/1 or /admins/1.json
   def destroy
