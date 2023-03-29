@@ -3,10 +3,18 @@ class SessionController < ApplicationController
 
     def create
         user = User.find_by(email: params[:email])
-     if user && user.authenticate(params[:password])
+        admin = Admin.find_by(email: params[:email])
+     if user && user.authenticate(params[:password_digest])
        token = encode_token({user_id: user.id})
        #  session[:jwt_token] = token
          render json: {loggedin: true, user: user, jwt: token }, status: :accepted
+     elsif 
+      admin && admin.authenticate(params[:password_digest])
+      token = encode_token({admin_id: admin.id})
+      #  session[:jwt_token] = token
+        render json: {loggedin: true, admin: admin, jwt: token }, status: :accepted
+    
+
      else
        render json: { error: 'Invalid email or password' }, status: :unauthorized
      end
@@ -20,7 +28,7 @@ class SessionController < ApplicationController
   private
 
   def session_params
-    params.permit(:email, :password)
+    params.permit(:email, :password_digest)
   end
 
 

@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: %i[ show edit update destroy ]
+  skip_before_action :authorize, only: [:index, :create]
+
 
   # GET /admins or /admins.json
   def index
@@ -23,17 +24,13 @@ class AdminsController < ApplicationController
 
   # POST /admins or /admins.json
   def create
-    @admin = Admin.new(admin_params)
-
-    respond_to do |format|
-      if @admin.save
-        format.html { redirect_to admin_url(@admin), notice: "Admin was successfully created." }
-        format.json { render :show, status: :created, location: @admin }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
-      end
+    admin = Admin.create(admin_params)
+   if admin
+    render json: admin, status: :created
+    else
+      render json: {"error": "cannot be created" }, status: :not_acceptable
     end
+  
   end
 
  
