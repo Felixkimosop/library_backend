@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   # end
 
   def show
-    names = User.find_by(name: params[:name])
+    names = User.find_by(id: params[:id])
     if names
 
     render json: names, status: :ok
