@@ -33,6 +33,16 @@ class AdminsController < ApplicationController
   
   end
 
+
+  def current_admin
+    if logged_in?
+      render json: current_admin.as_json(only: [:id, :name])
+    else
+      head :not_found
+    end
+  end
+
+
  
 
   # DELETE /admins/1 or /admins/1.json
@@ -50,6 +60,15 @@ class AdminsController < ApplicationController
     def set_admin
       @admin = Admin.find_by(id: params[:id])
     end
+
+    def logged_in?
+      !!current_admin
+    end
+
+    def current_admin
+      @current_admin ||= Admin.find(session[:admin_id]) if session[:admin_id]
+    end
+
 
     # Only allow a list of trusted parameters through.
     def admin_params

@@ -127,34 +127,50 @@ class ApplicationController < ActionController::Base
   def set_current_user
     if decoded_token
       user_id = decoded_token[0]['user_id']
-      admin_id = decoded_token[0]['admin_id']
+    
 
       if user_id
         @current_user = User.find_by(id: user_id)
-      elsif admin_id
-        @current_user = Admin.find_by(id: admin_id)
-      end
+     
     end
   end
+
+  # def set_current_admin
+  #   if decoded_token
+  #     admin_id = decoded_token[0]['admin_id']
+
+  #     if admin_id
+  #       @current_admin = Admin.find_by(id: admin_id)
+  #     end
+  #   end
   
   
-  def logged_in?
-    !!@current_user
+  
   end
+  def logged_in?
+    !!@current_user 
+  end
+  # def adminlog_in?
+  #   !!@current_admin 
+  # end
   def logged
-    render json: { logged_in: logged_in?, current_user: @current_user }
+    render json: { logged_in: logged_in?, current_user: @current_user }, include: :books
   end
 
+  # def administration
+  #   render json: { adminlog_in: adminlog_in?, current_admin: @current_admin }, include: :books
+  # end
+  
   def authorized_user
     render json: { message: 'Please log in as a user' }, status: :unauthorized unless logged_in? && @current_user.is_a?(User)
   end
 
   def authorized_admin
-    render json: { message: 'Please log in as an admin' }, status: :unauthorized unless logged_in? && @current_user.is_a?(Admin)
+    render json: { message: 'Please log in as an admin' }, status: :unauthorized unless logged_in? && @current_admin.is_a?(Admin)
   end
 
   def authorize
-    set_current_user
+    set_current_user 
     authorized_user && authorized_admin
   end
 end
