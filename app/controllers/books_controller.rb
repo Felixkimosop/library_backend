@@ -38,6 +38,7 @@ class BooksController < ApplicationController
 
   # DELETE /books/1 or /books/1.json
   def destroy
+    @book= set_book
     @book.destroy
 
     respond_to do |format|
