@@ -25,24 +25,55 @@ require 'faker'
 #     admin_id: Faker::Number.between(from: 1, to: 5)
 #   )
 # end
+# Book.create(title:"The Great Gatsby",image_url:"https://images.gr-assets.com/books/1490528560l/4671.jpg",
+#   description:"Set in the Jazz Age, this classic novel tells the story of Jay Gatsby's quest to win back his lost love, Daisy Buchanan, and his tragic downfall.",
+#   admin_id:33
+# )
+# Book.create(title:"To Kill a Mockingbird",image_url:"https://images.gr-assets.com/books/1361975680l/2657.jpg",
+#   description:"Set in the Jazz Age, this classic novel tells the story of Jay Gatsby's quest to win back his lost love, Daisy Buchanan, and his tragic downfall.",
+#   admin_id:34
+# )
+# Book.create(title:"The Catcher in the Rye",image_url:"https://images.gr-assets.com/books/1398034300l/5107.jpg",
+#   description:"This novel follows Holden Caulfield, a teenage boy expelled from his prep school, as he wanders around New York City, grappling with alienation, identity, and loss.",
+#   admin_id:35
+# )
 
+# User.create(name:"Lucy", email:"lulumuhoro@gmail.com", password: 'password',
+#   password_confirmation: 'password')
+# User.create(name:"Felix", email:"felix@gmail.com", password: 'password',
+#   password_confirmation: 'password')
+# User.create(name:"John", email:"john@gmail.com", password: 'password',
+#   password_confirmation: 'password')
+# User.create(name:"Osteen", email:"osteen@gmail.com", password: 'password',
+#   password_confirmation: 'password')
 
+# Admin.create(name:"Lucy", email:"lulumuhoro@gmail.com",password: 'password',
+#   password_confirmation: 'password')
+# Admin.create(name:"Felix", email:"felix@gmail.com", password: 'password',
+#   password_confirmation: 'password')
+# Admin.create(name:"John", email:"john@gmail.com", password: 'password',
+#   password_confirmation: 'password')
+# Admin.create(name:"Osteen", email:"osteen@gmail.com",  password: 'password',
+#     password_confirmation: 'password' )
+
+Collection.create(user_id:24, book_id:14)
+Collection.create(user_id:25, book_id:14)
+Collection.create(user_id:25, book_id:16)
 
 # 10.times do
 #   user = User.new(
 #     name: Faker::Name.name,
 #     email: Faker::Internet.email,
-#     password: 'password',
-#     password_confirmation: 'password'
+#    
 #   )
 #   user.save!
 # end
 
-10.times do
-  Collection.create!(
-    user_id: Faker::Number.between(from: 1, to: 5),
-    book_id: Faker::Number.between(from: 1, to: 5)
-  )
-end
+# 10.times do
+#   Collection.create!(
+#     user_id: Faker::Number.between(from: 1, to: 5),
+#     book_id: Faker::Number.between(from: 1, to: 5)
+#   )
+# end
 
 
