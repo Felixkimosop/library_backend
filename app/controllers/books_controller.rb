@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  skip_before_action :authorize, only: [:index, :create]
+  skip_before_action :authorize, only: [:index, :create, :show]
 
   # GET /books or /books.json
   def index
