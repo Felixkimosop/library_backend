@@ -1,5 +1,7 @@
 class Book < ApplicationRecord
   belongs_to :admin
   has_many :collections
-  has_many :users, through: :collections
+  has_many :users, through: :collections, dependent: :destroy
+
+  
 end
