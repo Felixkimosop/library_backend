@@ -155,6 +155,6 @@ class ApplicationController < ActionController::Base
 
   def authorize
     set_current_user
-    authorized_user || authorized_admin
+    authorized_user && authorized_admin
   end
 end
