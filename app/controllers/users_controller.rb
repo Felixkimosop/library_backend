@@ -50,6 +50,13 @@ class UsersController < ApplicationController
       
   end
  
+  def current_user
+    if logged_in?
+      render json: current_user.as_json(only: [:id, :name])
+    else
+      head :not_found
+    end
+  end
 
   
   # DELETE /users/1 or /users/1.json
@@ -67,6 +74,15 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find_by(id: params[:id])
     end
+
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
+
 
     # Only allow a list of trusted parameters through.
     def user_params
