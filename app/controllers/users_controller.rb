@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:index, :create, :show, :add_book]
+  skip_before_action :authorize, only: [:index, :create, :add_book]
 
   # GET /users or /users.json
   def index
@@ -7,10 +7,12 @@ class UsersController < ApplicationController
     render json: @users
   end
 
+  
+
   def add_book
     @user = User.find_by(id: params[:id])
     @book = Book.find_by(id: params[:book_id])
-
+  
     if @user.books.include?(@book)
       render json: { error: "Book already added to collection" }, status: :unprocessable_entity
     else
@@ -18,13 +20,7 @@ class UsersController < ApplicationController
       render json: { success: "Book added to collection" }
     end
   end
-
-  # GET /users/1 or /users/1.json
-  # def show
-  #   @users = set_user  
-  #   render json: @users, status: :ok
-    
-  # end
+  
 
   def show
     names = User.find_by(id: params[:id])
