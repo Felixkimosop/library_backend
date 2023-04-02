@@ -1,11 +1,15 @@
 class BooksController < ApplicationController
-  skip_before_action :authorize, only: [:index, :create, :show]
+  skip_before_action :authorize, only: [ :home]
 
   # GET /books or /books.json
   def index
     @books = Book.all
     render json: @books
   end
+  def home
+    @books = Book.all
+    render json: @books
+  end 
 
   # GET /books/1 or /books/1.json
   def show
